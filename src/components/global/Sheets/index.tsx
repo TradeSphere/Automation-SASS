@@ -11,12 +11,17 @@ type Props = {
     className?: string
 }
 
-const Sheet0 = ({children, trigger , className}: Props) => {
+const Sheet = ({children, trigger , className}: Props) => {
   return (
-    <div>
-        <Sheet/>
-    </div>
+  <ShadcnSheet>
+    <SheetTrigger className={className}>
+      {trigger}
+    </SheetTrigger>
+    <SheetContent>
+      {children}
+    </SheetContent>
+  </ShadcnSheet>
   )
 }
 
-export default Sheet0
+export default Sheet

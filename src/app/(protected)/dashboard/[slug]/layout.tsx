@@ -12,7 +12,7 @@ const Layout = ({children , params}: Props) => {
      // Query 
      // WIP :  Query CLient Fetch Data 
     return (
-      <div className='p-3 h-screen flex'>
+      <div className='p-3'>
         <Sidebar 
          slug ={params.slug} 
         />
@@ -21,6 +21,7 @@ const Layout = ({children , params}: Props) => {
         className='lg:ml-[250px] lg:pl-10 lg:py-5 flex flex-col overflow-auto'
         >
           <Navbar slug={params.slug} />
+          {children}
         </div>
     </div>
   )
