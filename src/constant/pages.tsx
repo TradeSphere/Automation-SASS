@@ -1,4 +1,4 @@
-import { Contact2, Home, PlugIcon, Settings, Star } from "lucide-react"
+import { Contact2, Home, HomeIcon, PlugIcon, Settings, Star } from "lucide-react"
 import React from "react"
 
 
@@ -18,5 +18,5 @@ export const PAGE_ICONS:Props = {
     CONTACTS: <Contact2/>,
     INTEGRATIONS: <PlugIcon/>,
     SETTINGS: <Settings/>,
-    Home: <Home/>
+    Home: <HomeIcon/>
 }
