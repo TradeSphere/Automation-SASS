@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '../../ui/button'
 import Loader from '../loader'
+import { Star } from 'lucide-react'
 
 type Props = {}
 
@@ -11,6 +12,7 @@ const CreateAutomation = (props: Props) => {
         <Loader state={false}>
             {/* TODO: ICONS HERE */}
             {/* <AutomationDuoToneWhite/> Icon */}
+            <Star/>
             <p>Create an Automation</p>
         </Loader>
     </Button>
