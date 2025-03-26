@@ -4,8 +4,8 @@ import React from "react"
 
 export const PAGE_BREAD_CRUMBS: string[] = [
     'contacts',
-    'automations',
-    'integrations',
+    'Automation',
+    'Integration',
     'settings'
 ]
 
