@@ -6,6 +6,8 @@ import React from 'react'
 type Props = {}
 
 const Page = (props: Props) => {
+  //WIp : connet with real automation list
+
   return (
     <div className='grid grid-cols-1 lg:grid-cols-6 gap-5'>
       <div className='lg:col-span-4'>
