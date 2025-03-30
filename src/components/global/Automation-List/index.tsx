@@ -7,11 +7,15 @@ import GradientButton from '../gradient-button'
 import { Button } from '@/components/ui/button'
 import { useQueryAutomations } from '@/Hook/user-queries'
 import CreateAutomation from '../CreateAutomation'
+import { useMutationDataState } from '@/Hook/use-mutation'
 
 type Props = {}
 
 const AutomationList = (props: Props) => {
   const { data } = useQueryAutomations()
+
+  const { latestVariable } = useMutationDataState(['create-automation'])
+  console.log(latestVariable)
 
   const {pathname} = usePaths()
   
