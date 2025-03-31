@@ -1,7 +1,7 @@
 'use server'
 
 import { onCurrentUser } from '../user'
-import { createAutomation, findAutomation, getAutomations } from './queries'
+import { createAutomation, findAutomation, getAutomations, updateAutomation } from './queries'
 
 export const createAutomations = async (id?: string) => {
     const user = await onCurrentUser()
@@ -35,5 +35,25 @@ export const getAutomationInfo = async (id: string) =>{
         return { status: 404}
     } catch (error) {
         return { status: 500}
+    }
+}
+
+export const updateAutomationName = async (
+    automationId: string,
+    data: {
+        name?: string
+        active?: boolean
+        automation?: string
+    }
+)=>{
+    await onCurrentUser()
+    try {
+        const update = await updateAutomation(automationId, data)
+        if (update) {
+            return { status: 200 , data: 'Automation successfully updated'}
+        }
+        return { status: 404, data: 'Oops! could not find automation'}
+    } catch (error) {
+        return { status: 500 , data: 'Something went wrong'}
     }
 }
