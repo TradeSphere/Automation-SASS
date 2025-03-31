@@ -1,3 +1,4 @@
+import { getAutomationInfo } from '@/action/automation'
 import Trigger from '@/components/global/automation/Trigger'
 import AutomationBreadCrumbs from '@/components/global/AutomationBreadCrumbs'
 import { LucideFileWarning } from 'lucide-react'
@@ -8,9 +9,17 @@ type Props = {
 }
 
 //WIP: Set some metadata
+export async function generateMetadata({ params }:{params: { id: string} }){
+  const info = await getAutomationInfo(params.id)
+  return {
+    title: info.data?.name
+  }
+}
+
 
 const Page = ({params}: Props) => {
   //WIP: prefetch user automation data
+
   return (
     <div className="flex flex-col items-center gap-y-20">
       <AutomationBreadCrumbs id={params.id}/>
