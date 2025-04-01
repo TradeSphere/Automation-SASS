@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/Provider/themeProvider";
 import { Toaster } from "sonner"
 import ReactQueryProvider from "@/Provider/react-query-provider";
+import ReduxProvider from "@/Provider/redux-provider";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,9 +30,11 @@ export default function RootLayout({
              enableSystem
              disableTransitionOnChange
           >
+          <ReduxProvider>
             <ReactQueryProvider>
               {children}
             </ReactQueryProvider>
+          </ReduxProvider>
             <Toaster/>
           </ThemeProvider>
       </body>
