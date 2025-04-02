@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import { useMutationData } from "./use-mutation"
-import { createAutomations, updateAutomationName } from "@/action/automation"
+import { createAutomations, saveListner, updateAutomationName } from "@/action/automation"
 import { useEffect, useRef, useState } from "react"
+import { z } from 'zod'
 
 export const useCreateAutomation = (id?: string) => {
     const { isPending , mutate } = useMutationData(
@@ -52,3 +53,19 @@ export const useEditAutomation = (automationId: string) => {
         isPending
     }
 }
+
+export const useListner = (id: string) => {
+    const [ listner , setListner ] = useState<'MESSAGE' | 'SMARTAI'>('MESSAGE')
+    const prompt = z.object({
+        prompt: z.string().min(1),
+        reply: z.string(),
+    })
+
+    const { isPending, mutate } = useMutationData(
+        ['create-Lister'],
+        (data: { prompt: string; reply: string }) => 
+            saveListner(id , listner , data.prompt , data.reply),
+        'automation-info'
+    )
+}
+

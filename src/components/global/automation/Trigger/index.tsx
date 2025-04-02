@@ -2,7 +2,6 @@
 import { useQueryAutomation } from '@/Hook/user-queries'
 import React from 'react'
 import ActiveTrigger from './active'
-import { stringify } from 'querystring'
 import { Separator } from '@radix-ui/react-separator'
 
 type Props = {
@@ -48,7 +47,7 @@ const Trigger = ({id}: Props) => {
             ]}
           />
         </>
-      
+        <ThenAction/>
       </div>
     )
   }
