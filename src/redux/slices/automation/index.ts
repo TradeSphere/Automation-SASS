@@ -1,3 +1,4 @@
+'use client'
 import { duplicateValidation } from "@/lib/utils";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
@@ -25,19 +26,12 @@ export const AUTOMATION = createSlice({
     initialState: InitialState,
     reducers: {
         TRIGGER: (state,action: PayloadAction<InitialStateTriggerProps>) => {
-            Final Summary
-This Redux slice manages automation triggers (COMMENT/DM).
-
-It prevents duplicate triggers using duplicateValidation.
-
-The TRIGGER function updates the state when a new trigger is added.
-
- = duplicateValidation(
+            state.trigger!.types = duplicateValidation(
                 state.trigger?.types!,
                 action.payload.trigger?.type!
             )
             return state
-        },
+        }
     }
 })
 
