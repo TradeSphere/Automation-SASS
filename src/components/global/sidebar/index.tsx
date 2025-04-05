@@ -5,7 +5,7 @@ import Items from './items'
 import { Separator } from '@/components/ui/separator'
 import ClerkAuthState from '../clerk-auth-state'
 import { FileQuestion } from 'lucide-react'
-import { SubscriptionPlane } from '../subscriptionPlane/subscriptionPlane'
+import { SubscriptionPlane } from '../subscriptionPlane'
 import UpgradeCard from './upgradeCard'
 
 type Props = {

@@ -18,8 +18,10 @@ const TriggerButton = ({children , label}: Props) => {
                 <p className='text-[#7688DD] font-bold'>{label}</p>
             </div>
         }
-
-      ></PopOver>
+        
+      >
+        {children}
+      </PopOver>
   ) 
 }
 

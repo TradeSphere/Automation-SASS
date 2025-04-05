@@ -73,7 +73,7 @@ export const onUserInfo = async () =>{
     const user = await onCurrentUser()
     try {
         const profile = await findUser(user.id)
-        if(profile) return { statys:200 , data: profile}
+        if(profile) return { status:200 , data: profile } 
 
         return { status:404 }
     } catch (error) {
