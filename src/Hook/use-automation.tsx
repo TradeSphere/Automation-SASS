@@ -1,9 +1,11 @@
-import { useMutation } from "@tanstack/react-query"
 import { useMutationData } from "./use-mutation"
-import { createAutomations, saveListner, updateAutomationName } from "@/action/automation"
+import { createAutomations, saveListner, saveTrigger, updateAutomationName } from "@/action/automation"
 import { useEffect, useRef, useState } from "react"
 import { z } from 'zod'
 import useZodForm from "./use-zod-from"
+import { AppDispatch, useAppSelector } from "@/redux/store"
+import { useDispatch } from "react-redux"
+import { TRIGGER } from "@/redux/slices/automation"
 
 export const useCreateAutomation = (id?: string) => {
     const { isPending , mutate } = useMutationData(
@@ -78,3 +80,23 @@ export const useListner = (id: string) => {
     return { onSetListner , register , onFormSubmit , listner , isPending}
 }
 
+
+
+export const useTrigger = (id: string) => {
+    const types = useAppSelector((state)=> state.AutomationReducer.trigger?.types)
+
+    const dispatch: AppDispatch = useDispatch()
+
+    const onSetTrigger = (type: 'COMMENT' | 'DM') => {
+        dispatch(TRIGGER({ trigger: {type}}))
+    }
+
+    const { isPending, mutate } = useMutationData(
+        ['add-trigger'] ,
+        (data: { types: string[]})=> saveTrigger(id, data.types),
+        "automation-info"
+    )
+
+    const onSaveTrigger = () => mutate({ types })
+    return { types, onSetTrigger ,  onSaveTrigger , isPending}
+}

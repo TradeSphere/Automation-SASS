@@ -37,4 +37,4 @@ export const AUTOMATION = createSlice({
 
 
 export const { TRIGGER } = AUTOMATION.actions
-export default AUTOMATION.actions
+export default AUTOMATION.reducer

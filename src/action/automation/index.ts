@@ -1,7 +1,7 @@
 'use server'
 
 import { onCurrentUser } from '../user'
-import { addListner, createAutomation, findAutomation, getAutomations, updateAutomation } from './queries'
+import { addListner, addTrigger, createAutomation, findAutomation, getAutomations, updateAutomation } from './queries'
 
 export const createAutomations = async (id?: string) => {
     const user = await onCurrentUser()
@@ -72,5 +72,16 @@ export const saveListner = async (
         return { status: 404, data: 'Cant save listener'}
     } catch (error) {
         return { status: 500 , data: 'Oops ! , something weng wrong'}
+    }
+}
+
+
+export const saveTrigger = async ( automationId: string, trigger: string[]) => {
+    await onCurrentUser()
+    try {
+        const create = await addTrigger(automationId , trigger)
+        return { status: 404, data: 'Cannot save trigger' }
+    } catch (error) {
+        return { status: 500, data: 'Oops! something went wrong'}
     }
 }

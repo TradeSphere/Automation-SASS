@@ -95,3 +95,31 @@ export const addListner = async (
         }
     })
 }
+
+
+export const addTrigger = async (automationId: string, trigger: string[])=>{
+    if (trigger.length === 2) {
+        return await client.automation.update({
+            where: { id: automationId },
+            data:{
+                trigger: {
+                    createMany: {
+                        data: [{ type: trigger[0]}, { type: trigger[1] }],      
+                    }
+                }
+            }
+        })
+    }
+    return await client.automation.update({
+        where: {
+            id: automationId,
+        },
+        data: {
+            trigger: {
+                create: {
+                    type: trigger[0]
+                }
+            }
+        }
+    })
+}
