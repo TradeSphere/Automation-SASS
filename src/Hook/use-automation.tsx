@@ -1,5 +1,5 @@
 import { useMutationData } from "./use-mutation"
-import { createAutomations, saveListner, saveTrigger, updateAutomationName } from "@/action/automation"
+import { createAutomations, deleteKeyword, saveKeywords, saveListner, saveTrigger, updateAutomationName } from "@/action/automation"
 import { useEffect, useRef, useState } from "react"
 import { z } from 'zod'
 import useZodForm from "./use-zod-from"
@@ -99,4 +99,32 @@ export const useTrigger = (id: string) => {
 
     const onSaveTrigger = () => mutate({ types })
     return { types, onSetTrigger ,  onSaveTrigger , isPending}
+}
+
+
+export const useKeywords = (id: string) => {
+    const [keyword , setKeyword] = useState('')
+    const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => setKeyword(e.target.value)
+
+    const { mutate } = useMutationData(
+        ['add-keywords'],
+        (data: { keyword : string})=> saveKeywords(id, data.keyword),
+        'automation-info',
+        () => setKeyword('')
+    )
+
+    const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.key === 'Enter'){
+            mutate({ keyword })    
+            setKeyword('')
+        }
+    }
+
+    const { mutate: deleteMutation} = useMutationData(
+        ['delete-keywords'],
+        (data: { id : string})=> deleteKeyword(data.id),
+        'automation-info',
+    )
+
+    return { keyword , onValueChange , onKeyPress , deleteMutation}
 }

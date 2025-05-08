@@ -2,6 +2,7 @@
 
 import { client } from "@/lib/prisma"
 import { v4 } from "uuid"
+import { onCurrentUser } from "../user"
 
 export const createAutomation = async(clerkId: string, id?: string ) => {
     return await client.user.update({
@@ -121,5 +122,26 @@ export const addTrigger = async (automationId: string, trigger: string[])=>{
                 }
             }
         }
+    })
+}
+
+export const addKeyWord = async (automationId: string, keyword: string) => {
+    return await client.automation.update({
+        where: {
+            id: automationId,
+        },
+        data: {
+            keywords: {
+                create: {
+                    word: keyword
+                }
+            }
+        }
+    })
+}
+
+export const deleteKeyWordQuery = async (id: string) => {
+    return await client.keyword.delete({
+        where: { id }
     })
 }

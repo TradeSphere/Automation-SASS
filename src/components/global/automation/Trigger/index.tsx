@@ -8,6 +8,9 @@ import TriggerButton from '../trigger-button'
 import { AUTOMATIONTRIGGER } from '@/constant/automation'
 import { useTrigger } from '@/Hook/use-automation'
 import { cn } from '@/lib/utils'
+import Keywords from './keywords'
+import { Button } from '@/components/ui/button'
+import Loader from '../../loader'
 
 type Props = {
     id: string
@@ -23,6 +26,7 @@ const Trigger = ({id}: Props) => {
         {/* WIP: add this for the type data.data.trigger.length */}
         <ActiveTrigger
           type={data.data.trigger[0].type}
+          // keywords={data.data.keywords.filter(keyword => keyword.automationId !== null) as { id: string; word: string; automationId: string }[]}
           keywords={data.data.keywords}
         />
         {/* WIP: add this for the type data.data.trigger.length */}
@@ -58,7 +62,8 @@ const Trigger = ({id}: Props) => {
               'hover:opacity-80 text-white rounded-xl flex cursor-pointer flex-col p-3 gap-y-2',
               !types?.find((t) => t === trigger.type)
                 ? 'bg-gray-950'
-                : 'bg-gradient-to-br from-[#3352CC] font-medium to-[#1C2D70]'
+                : 'bg-blue-650',
+                // : 'bg-gradient-to-br from-[#3352CC] to-[#1C2D70] font-medium'
             )}  
           >
             <div className='flex gap-x-2 items-center'>
@@ -67,6 +72,14 @@ const Trigger = ({id}: Props) => {
             </div>
           </div>
         ))}
+        <Keywords id={id}/>
+        <Button
+          onClick={onSaveTrigger}
+          disabled={types?.length === 0}
+          className='bg-gradient-to-br from-[#3352CC] to-[#1C2D70] text-white font-medium rounded-xl p-3'
+        >
+          <Loader state={isPending}>Create Trigger</Loader>          
+        </Button>
       </div>
     </TriggerButton>
   }

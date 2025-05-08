@@ -1,7 +1,7 @@
 'use server'
 
 import { onCurrentUser } from '../user'
-import { addListner, addTrigger, createAutomation, findAutomation, getAutomations, updateAutomation } from './queries'
+import { addKeyWord, addListner, addTrigger, createAutomation, deleteKeyWordQuery, findAutomation, getAutomations, updateAutomation } from './queries'
 
 export const createAutomations = async (id?: string) => {
     const user = await onCurrentUser()
@@ -81,6 +81,33 @@ export const saveTrigger = async ( automationId: string, trigger: string[]) => {
     try {
         const create = await addTrigger(automationId , trigger)
         return { status: 404, data: 'Cannot save trigger' }
+    } catch (error) {
+        return { status: 500, data: 'Oops! something went wrong'}
+    }
+}
+
+
+export const saveKeywords = async (automationId: string, keywords: string) => {
+    await onCurrentUser()
+    try {
+        const create = await addKeyWord(automationId , keywords)
+
+        if(create) return { status: 200, data: 'Keyword created successfully'}
+
+        return { status: 404, data: 'Cannot add this keyword'}
+    } catch (error) {
+        return { status: 500, data: 'Oops! Something went wrong'}
+    }
+}
+
+export const deleteKeyword = async (id: string) => {
+    await onCurrentUser()
+    try {
+        const deleted = await deleteKeyWordQuery(id)
+
+        if(deleted) return { status: 200, data: 'Keyword deleted successfully'}
+        
+        return { status: 404, data: 'Keyword not found'}
     } catch (error) {
         return { status: 500, data: 'Oops! something went wrong'}
     }
