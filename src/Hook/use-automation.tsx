@@ -128,3 +128,5 @@ export const useKeywords = (id: string) => {
 
     return { keyword , onValueChange , onKeyPress , deleteMutation}
 }
+
+export const useAutomationPosts = ( id: string)
