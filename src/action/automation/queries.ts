@@ -145,3 +145,30 @@ export const deleteKeyWordQuery = async (id: string) => {
         where: { id }
     })
 }
+
+export const addPost = async (
+    automationId: string,
+    posts: {
+        postid: string
+        caption?: string
+        media: string
+        mediaType: 'IMAGE' | 'VIDEO' | 'CAROSEL_ALBUM'
+    }[]
+) => {
+    return await client.automation.update({
+        where: {
+            id: automationId,
+        },
+        data: {
+            posts: {
+                createMany: {
+                    // data: posts
+                    data: posts.map(post => ({
+                        ...post,
+                        caption: post.caption ?? ""
+                    }))
+                }
+            }
+        }
+    })
+}

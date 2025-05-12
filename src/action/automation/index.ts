@@ -2,7 +2,7 @@
 
 import { onCurrentUser } from '../user'
 import { findUser } from '../user/queries'
-import { addKeyWord, addListner, addTrigger, createAutomation, deleteKeyWordQuery, findAutomation, getAutomations, updateAutomation } from './queries'
+import { addKeyWord, addListner, addPost, addTrigger, createAutomation, deleteKeyWordQuery, findAutomation, getAutomations, updateAutomation } from './queries'
 
 export const createAutomations = async (id?: string) => {
     const user = await onCurrentUser()
@@ -127,7 +127,29 @@ export const getProfilePosts = async() => {
         if(parsed) return { status: 200 , data: parsed}
         console.log("Error in getting posts")
     } catch (error) {
-        console.log("server side error in getting posts ", errors) 
-        return { status: 500}       
+        console.log("server side error in getting posts ", error) 
+        return { status: 500 }       
+    }
+}
+
+
+export const savePosts = async (
+    automationId: string,
+    posts: {
+        postid: string
+        caption?: string
+        media: string
+        mediaType: "IMAGE" | 'VIDEO' | 'CAROSEL_ALBUM'
+    }[]
+) => {
+    await onCurrentUser()
+    try {
+        const create = await addPost(automationId, posts)
+
+        if (create) return { status: 200, data: 'post attached'}
+
+        return { status: 404, data: "Automation not found"}
+    } catch (error) {
+        return { status: 500 , data: "Oops! something went wrong"}
     }
 }
