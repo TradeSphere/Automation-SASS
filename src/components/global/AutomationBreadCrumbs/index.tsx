@@ -67,7 +67,7 @@ const AutomationBreadCrumbs = ({id}: Props) => {
             
           </div>
         </div>
-        <ActivateAutomationButton/>
+        <ActivateAutomationButton id={id} />
     </div>
   )
 }

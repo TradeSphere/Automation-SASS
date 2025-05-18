@@ -35,7 +35,7 @@ const ThenNode = ( {id}: Props) => {
         {/* <Warning /> ICON HERE */}
         Then ...
     </div>
-    <div className='bg-gray-600 p-3 rounded-xl flex flex-col gap-y-2'>
+    <div className='bg-[#2a2a2a] p-3 rounded-xl flex flex-col gap-y-2'>
         <div className='flex gap-x-2 items-center'>
             {data.data.listner.listener === 'MESSAGE' ? <Instagram/> : <meta /> }
             <p className='text-lg'>

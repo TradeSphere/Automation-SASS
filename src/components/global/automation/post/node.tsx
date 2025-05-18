@@ -1,3 +1,4 @@
+"use client"
 import { useQueryAutomation } from '@/Hook/user-queries'
 import { Separator } from '@radix-ui/react-separator'
 import { FileWarning, Instagram } from 'lucide-react'

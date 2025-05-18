@@ -1,6 +1,7 @@
 import { getAllAutomations, getAutomationInfo, getProfilePosts } from "@/action/automation"
 import { onUserInfo } from "@/action/user"
 import { useQuery } from "@tanstack/react-query"
+// import { useQuery } from "@tanstack/react-query"
 
 export const useQueryAutomations = () => {
     return useQuery(
