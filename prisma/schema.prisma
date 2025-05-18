@@ -20,6 +20,7 @@ model User {
   lastname      String?       @unique
   firstname     String?       @unique
   createdAt     DateTime      @default(now())
+  plan          SUBCRIPTION_PLAN @default(FREE)
   subscription  Subscription?                        // relation to subscription
   integrations  Integrations[]
   automations   Automation[]
@@ -29,6 +30,7 @@ model Subscription {
   id          String     @id      @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   User        User?      @relation(fields: [userId], references: [id], onDelete: Cascade)    /// Realtion betwenn two models
   userId      String?    @unique  @db.Uuid
+  plan        SUBCRIPTION_PLAN @default(FREE)
 }
 
 model Integrations {
@@ -87,6 +89,7 @@ model Listener {
   commentReply  String?
   amount        Int           @default(0)
   commentCount  Int           @default(0)
+  dmCount       Int           @default(0)
 }
 
 
