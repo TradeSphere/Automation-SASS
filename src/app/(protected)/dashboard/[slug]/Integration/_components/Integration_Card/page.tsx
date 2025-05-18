@@ -1,3 +1,5 @@
+'use client'
+
 import { onOAuthInstagram } from '@/action/integrations'
 import { onUserInfo } from '@/action/user'
 import { Button } from '@/components/ui/button'
@@ -13,7 +15,8 @@ type Props = {
 
 const IntegrationCard = ({description , icon , strategy , title}: Props) => {
     //CC : wire up fetching data and get the integration from the db
-  const onInstaOAuth = onOAuthInstagram(strategy)
+  const onInstaOAuth = () => onOAuthInstagram(strategy)
+  
   const { data } = useQuery({
     queryKey: ['user-profile'],
     queryFn: onUserInfo
@@ -39,7 +42,6 @@ const IntegrationCard = ({description , icon , strategy , title}: Props) => {
             font-medium to-[#1C2D70] hover:opacity-70 transition duration-100'
         >
             {integrated ? 'Connected' : 'Connect'}
-            Connect
         </Button>
     </div>
   )
