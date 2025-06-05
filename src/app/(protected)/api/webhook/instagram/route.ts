@@ -5,6 +5,7 @@ import { client } from "@/lib/prisma";
 import { NextRequest , NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
+    console.log("👋 Webhook GET called");
     const hub = req.nextUrl.searchParams.get('hub.challenge')
     return new NextResponse(hub)
 }
@@ -143,7 +144,7 @@ export async function POST(req: NextRequest){
                     false
                 )
 
-                const automation_post = await await getKeywordPost(
+                const automation_post = await getKeywordPost(
                     webhook_payload.entry[0].changes[0].value.media.id,
                     automation?.id!
                 )
@@ -151,9 +152,9 @@ export async function POST(req: NextRequest){
                 if (automation && automation_post && automation.trigger) {
                     if ( automation.listner ) {
                         if (automation.listner.listener === 'MESSAGE') {
-                            const direct_Message = await sendDM(
+                            const direct_Message = await sendPrivateMessage(
                                 webhook_payload.entry[0].id,
-                                webhook_payload.entry[0].changes[0].value.from.id,
+                                webhook_payload.entry[0].changes[0].value.id,
                                 automation.listner?.prompt,
                                 automation.User?.integrations[0].token!
                             )

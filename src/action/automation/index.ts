@@ -81,6 +81,7 @@ export const saveTrigger = async ( automationId: string, trigger: string[]) => {
     await onCurrentUser()
     try {
         const create = await addTrigger(automationId , trigger)
+        if(create) return { status:200 , data: 'Listener created'}
         return { status: 404, data: 'Cannot save trigger' }
     } catch (error) {
         return { status: 500, data: 'Oops! something went wrong'}
@@ -165,8 +166,8 @@ export const activateAutomation = async (id: string, state: boolean) => {
                 data: `Automation ${state ? 'activated' : 'disabled'}`
             }
         }
-        return { state: 404 , data: 'Automation not found'}
+        return { status: 404 , data: 'Automation not found'}
     } catch (error) {
-        return { state: 500, data: 'Oops! something went wrong'}
+        return { status: 500, data: 'Oops! something went wrong'}
     }
 }
