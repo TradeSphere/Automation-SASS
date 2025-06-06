@@ -1,6 +1,6 @@
 import { findAutomation } from "@/action/automation/queries";
 import { createChatHistory, getKeywordAutomation, getKeywordPost, matchKeyword } from "@/action/webhooks/query";
-import { sendDM, trackResponses } from "@/lib/fetch";
+import { sendDM, sendPrivateMessage, trackResponses } from "@/lib/fetch";
 import { client } from "@/lib/prisma";
 import { NextRequest , NextResponse } from "next/server";
 
@@ -23,6 +23,7 @@ export async function POST(req: NextRequest){
 
         //comments
         if (webhook_payload.entry[0].changes) {
+            console.log(webhook_payload.entry[0].changes[0].value.text)
             matcher = await matchKeyword(
                 webhook_payload.entry[0].changes[0].value.text
             )
@@ -165,6 +166,7 @@ export async function POST(req: NextRequest){
                                     'COMMENT'
                                 )
     
+                                console.log('Direct message sent', direct_Message)
                                 if(tracked){
                                     return NextResponse.json({
                                         status: 200,
@@ -288,6 +290,7 @@ export async function POST(req: NextRequest){
                         )
 
                         if(direct_Message.status === 200){
+                            console.log('Message sent successfully', direct_Message)
                             return NextResponse.json({
                                 status: 200,
                                 message: 'Message sent'
@@ -310,8 +313,9 @@ export async function POST(req: NextRequest){
 
 
     } catch (error) {
+        console.log('Error in Instagram webhook:', error)
         return NextResponse.json({
-            status: 500,
+            status: 200,
             message: 'Internal server error',
         })
     }
