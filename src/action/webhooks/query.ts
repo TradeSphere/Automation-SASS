@@ -22,7 +22,7 @@ export const getKeywordAutomation = async (
         },
 
         include: {
-            dms: dm,
+            dms: true,
             trigger: {
                 where: {
                     type: dm ? 'DM' : 'COMMENT'

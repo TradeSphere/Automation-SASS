@@ -45,6 +45,10 @@ export async function POST(req: NextRequest){
                         automation.listner && 
                         automation.listner.listener === 'MESSAGE'
                     ) {
+                        console.log("🧠 Automation ID:", automation.id);
+                        console.log("👤 User ID:", automation.User?.integrations);
+                        console.log("🔐 Token:", automation.User?.integrations?.[0]?.token);
+
                         const direct_Message = await sendDM(
                             //our user id
                             webhook_payload.entry[0].id,
