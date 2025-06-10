@@ -1,8 +1,9 @@
 import DoubleGradientCard from '@/components/global/doubleGradientCard'
 import { DASHBOARD_CARDS } from '@/constant/dashboard'
 import { Building, LucideBuilding } from 'lucide-react'
-import { Cardo } from 'next/font/google'
 import React from 'react'
+import Chart from './_components/chat'
+import MetricsCard from './_components/chat/metricsCard'
 
 type Props = {}
 
@@ -25,7 +26,7 @@ const Page = (props: Props) => {
       <div className='border-[1px] relative border-[#545454] p-5 rounded-xl'>
         <span className='flex gap-x-1 z-50 items-center'>
           {/* <AutomationIcon/> */}
-          <Building fill='blue'/>
+          {/* <Building fill='blue'/> */}
           <div className='z-50'>
             <h2 className='text-2xl font-medium text-white'>
               Automated Activity
@@ -38,6 +39,9 @@ const Page = (props: Props) => {
         <div className='w-full flex lg:flex-row flex-col gap-5'>
           <div className='lg:w-6/12'>
             <Chart />
+          </div>
+          <div className='lg:w-6/12'>
+            <MetricsCard/>
           </div>
         </div>
       </div>
